@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNITE 2026 | Spark the Future</title>
+    <meta name="description" content="IGNITE 2026 - The premier annual summit where technology, design, and culture catch fire. An unforgettable cinematic tech & cultural festival.">
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+<body>
+
+    <!-- =================================================================
+         3D WebGL Canvas Layer (Three.js Fire Engine)
+         ================================================================= -->
+    <div id="webgl-canvas-container"></div>
+
+    <!-- Opening Screen Click-Catcher (Active during dark state) -->
+    <div id="opening-click-catcher" title="Click anywhere to ignite the bonfire"></div>
+
+    <!-- Explosion Screen Flash Effect -->
+    <div id="explosion-flash"></div>
+
+    <!-- Heat Distortion & Atmospheric Shimmer Filter -->
+    <div id="heat-distortion-overlay"></div>
+
+    <!-- =================================================================
+         STAGE 1: Darkness Initial Screen Prompt
+         ================================================================= -->
+    <div id="initial-prompt">
+        <div class="prompt-inner">
+            <div class="prompt-icon">
+                <div class="prompt-pulse"></div>
+                <div class="prompt-dot"></div>
+            </div>
+            <div class="prompt-text">Click anywhere to ignite</div>
+            <div class="prompt-subtext">AUDIO ENABLED • IMMERSIVE 3D EXPERIENCE</div>
+        </div>
+    </div>
+
+    <!-- =================================================================
+         STAGE 5 & 6: Fiery Title Lock Container
+         ================================================================= -->
+    <div id="title-lock-container">
+        <h1 class="fiery-brand-title">IGNITE</h1>
+        <div class="fiery-brand-sub">SPARK THE FUTURE • APEX 2026</div>
+    </div>
+
+    <!-- =================================================================
+         STAGE 7: Floating Luxury Navigation Bar
+         ================================================================= -->
+    <nav id="main-nav">
+        <div class="nav-pill">
+            <a href="#hero" class="nav-brand">
+                <span class="nav-logo-flame"></span>
+                <span>IGNITE</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#speakers">Speakers</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#pricing">Passes</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Audio Mute/Unmute Toggle -->
+                <button id="audio-toggle-btn" class="audio-toggle-btn" aria-label="Toggle sound">
+                    <span class="audio-wave">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="audio-label">Sound On</span>
+                </button>
+
+                <a href="#pricing" class="nav-cta-btn">Get Passes</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =================================================================
+         STAGE 7: Main Event Portal
+         ================================================================= -->
+    <main id="event-website">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    <span>NOVEMBER 14-16, 2026 • SAN FRANCISCO & VIRTUAL</span>
+                </div>
+
+                <h1 class="hero-headline">IGNITE</h1>
+                <p class="hero-tagline">
+                    Where radical engineering, visionary design, and cultural electricity collide. <strong>Fuel your ambition. Spark what's next.</strong>
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#about" class="cta-primary">
+                        <span>EXPLORE IGNITE</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#pricing" class="cta-secondary">Reserve Your Pass</a>
+                </div>
+
+                <!-- Event Countdown -->
+                <div class="countdown-box">
+                    <div class="countdown-unit">
+                        <span id="cd-days" class="cd-val">42</span>
+                        <span class="cd-lbl">Days</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span id="cd-hours" class="cd-val">18</span>
+                        <span class="cd-lbl">Hours</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span id="cd-mins" class="cd-val">24</span>
+                        <span class="cd-lbl">Mins</span>
+                    </div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit">
+                        <span id="cd-secs" class="cd-val">50</span>
+                        <span class="cd-lbl">Secs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT SECTION -->
+        <section id="about">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Origin & Vision</span>
+                    <h2 class="section-title">The Catalyst For <span>Breakthroughs</span></h2>
+                    <p class="section-subtitle">IGNITE is not just an event. It is a multi-disciplinary movement designed to spark revolutionary ideas in AI, creative computing, autonomous systems, and sound design.</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-narrative">
+                        <h3>From a single spark, empires of innovation are forged.</h3>
+                        <p>Every year, over 15,000 engineers, founders, digital artists, and hackers gather under one luminous roof to compete, collaborate, and push the human boundary forward.</p>
+                        <p>With cutting-edge multi-track competitions, keynote stages, hands-on hardware labs, and unforgettable after-hours synth festivals, IGNITE is the annual pilgrimage for pioneers.</p>
+
+                        <div class="about-pillars">
+                            <div class="pillar-card">
+                                <div class="pillar-icon">⚡</div>
+                                <h4>Radical Tech</h4>
+                                <p>Deep tech explorations in generative intelligence, robotics, and next-gen infrastructure.</p>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="pillar-icon">🔥</div>
+                                <h4>Pure Energy</h4>
+                                <p>48-hour continuous hackathons, intense combat robotics, and live electronic symphonies.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Stats Cards -->
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-num">3</div>
+                            <div class="stat-label">Days of Immersion</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-num">50+</div>
+                            <div class="stat-label">Keynotes & Tracks</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-num">15K+</div>
+                            <div class="stat-label">Global Innovators</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-num">$75K</div>
+                            <div class="stat-label">Bounties & Prizes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. EVENTS / TRACKS SECTION -->
+        <section id="events">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Competitive Arenas</span>
+                    <h2 class="section-title">Tracks & <span>Challenges</span></h2>
+                    <p class="section-subtitle">Compete on international stages, showcase your prototypes, or battle in high-voltage robotics arenas.</p>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All Tracks</button>
+                    <button class="filter-btn" data-filter="tech">Engineering & AI</button>
+                    <button class="filter-btn" data-filter="combat">Robotics & Arena</button>
+                    <button class="filter-btn" data-filter="creative">Design & Media</button>
+                    <button class="filter-btn" data-filter="culture">Music & Nights</button>
+                </div>
+
+                <!-- Events Grid -->
+                <div class="events-grid">
+                    <!-- Card 1 -->
+                    <div class="event-card" data-category="tech">
+                        <div>
+                            <div class="event-card-top">
+                                <span class="event-badge">Hackathon</span>
+                                <span class="event-prize">$25,000 Pool</span>
+                            </div>
+                            <h3 class="event-title">Apex Hack: Zero to Singularity</h3>
+                            <p class="event-desc">Build autonomous agents, spatial computing tools, and decentralized networks in a grueling 36-hour sprint with top venture partners on site.</p>
+                        </div>
+                        <div>
+                            <div class="event-meta">
+                                <span>📍 Main Arena</span>
+                                <span>⏱ 36 Hours</span>
+                            </div>
+                            <a href="#" class="event-card-btn" data-modal-title="Apex Hack: Zero to Singularity" data-modal-desc="Judged by top Silicon Valley founders and researchers. Includes high-performance GPU clusters, mentorship from AI laboratory leads, and guaranteed seed interview opportunities.">View Challenge Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="event-card" data-category="combat">
+                        <div>
+                            <div class="event-card-top">
+                                <span class="event-badge">Robotics</span>
+                                <span class="event-prize">$15,000 Pool</span>
+                            </div>
+                            <h3 class="event-title">Inferno Bot Wars</h3>
+                            <p class="event-desc">60lb combat machines clash inside our reinforced polycarbonate pit with live flame hazards and kinetic spinners.</p>
+                        </div>
+                        <div>
+                            <div class="event-meta">
+                                <span>📍 Thunderdome</span>
+                                <span>⏱ Double Elimination</span>
+                            </div>
+                            <a href="#" class="event-card-btn" data-modal-title="Inferno Bot Wars" data-modal-desc="Heavyweight clash regulated by BattleBots safety standards. Full arena hazard triggers, pneumatic spikes, and streaming telemetry dashboards.">View Arena Rules</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="event-card" data-category="creative">
+                        <div>
+                            <div class="event-card-top">
+                                <span class="event-badge">Generative Art</span>
+                                <span class="event-prize">$10,000 Pool</span>
+                            </div>
+                            <h3 class="event-title">Luminescent: Spatial Odyssey</h3>
+                            <p class="event-desc">Live shader showdown, interactive projection mapping, and real-time audio-visual synthesizer performances.</p>
+                        </div>
+                        <div>
+                            <div class="event-meta">
+                                <span>📍 Immersion Dome</span>
+                                <span>⏱ Live Showcases</span>
+                            </div>
+                            <a href="#" class="event-card-btn" data-modal-title="Luminescent: Spatial Odyssey" data-modal-desc="Artists and programmers compete head-to-head in real-time TouchDesigner and GLSL shader jams projected across 360-degree cylindrical screens.">View Showcase Specs</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="event-card" data-category="tech">
+                        <div>
+                            <div class="event-card-top">
+                                <span class="event-badge">Founder Stage</span>
+                                <span class="event-prize">$150,000 Investment</span>
+                            </div>
+                            <h3 class="event-title">Spark Venture Pitch</h3>
+                            <p class="event-desc">10 shortlisted early-stage tech teams pitch live before Tier-1 angels, accelerator leads, and a 2,000-person live audience.</p>
+                        </div>
+                        <div>
+                            <div class="event-meta">
+                                <span>📍 Stage Alpha</span>
+                                <span>⏱ 5 Min Pitch + Q&A</span>
+                            </div>
+                            <a href="#" class="event-card-btn" data-modal-title="Spark Venture Pitch" data-modal-desc="Direct syndicate backing from Sequoia, Andreessen Horowitz alumni, and specialized hardware venture funds. Demo tables included for all finalists.">Pitch Guidelines</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="event-card" data-category="culture">
+                        <div>
+                            <div class="event-card-top">
+                                <span class="event-badge">Night Festival</span>
+                                <span class="event-prize">Headliner Sets</span>
+                            </div>
+                            <h3 class="event-title">Afterburn: Cybernetic Beats</h3>
+                            <p class="event-desc">World-class electronic producers, laser harpists, and modular synth collectives soundtrack the midnight hours.</p>
+                        </div>
+                        <div>
+                            <div class="event-meta">
+                                <span>📍 Neon Courtyard</span>
+                                <span>⏱ 10:00 PM – 3:00 AM</span>
+                            </div>
+                            <a href="#" class="event-card-btn" data-modal-title="Afterburn: Cybernetic Beats" data-modal-desc="Featuring headline acts fusing live modular Eurorack improvisation with reactive volumetric laser projections and bonfire stages.">Lineup & Times</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="event-card" data-category="tech">
+                        <div>
+                            <div class="event-card-top">
+                                <span class="event-badge">Security</span>
+                                <span class="event-prize">$12,000 Pool</span>
+                            </div>
+                            <h3 class="event-title">Glitch In The Machine (CTF)</h3>
+                            <p class="event-desc">Zero-day reverse engineering, smart contract exploits, and firmware extraction in an adversarial cyber range.</p>
+                        </div>
+                        <div>
+                            <div class="event-meta">
+                                <span>📍 Cyber Lab 04</span>
+                                <span>⏱ 24 Hours</span>
+                            </div>
+                            <a href="#" class="event-card-btn" data-modal-title="Glitch In The Machine (CTF)" data-modal-desc="Jeopardy-style and attack-defense challenges designed by leading security researchers. Hardware target boards provided physically to teams.">CTF Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SCHEDULE SECTION -->
+        <section id="schedule">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Agenda</span>
+                    <h2 class="section-title">The Three-Day <span>Trajectory</span></h2>
+                    <p class="section-subtitle">Every hour is packed with keynotes, rapid-fire workshops, fireside chats, and intense tournament rounds.</p>
+                </div>
+
+                <!-- Schedule Nav -->
+                <div class="schedule-nav">
+                    <button class="schedule-tab-btn active" data-day="1">
+                        <span class="tab-day">Day 01 — Genesis</span>
+                        <span class="tab-date">Nov 14 • Ignition & Opening</span>
+                    </button>
+                    <button class="schedule-tab-btn" data-day="2">
+                        <span class="tab-day">Day 02 — Conflagration</span>
+                        <span class="tab-date">Nov 15 • Hacks & Battles</span>
+                    </button>
+                    <button class="schedule-tab-btn" data-day="3">
+                        <span class="tab-day">Day 03 — The Apex</span>
+                        <span class="tab-date">Nov 16 • Finals & Afterburn</span>
+                    </button>
+                </div>
+
+                <!-- Timeline Day 1 -->
+                <div id="schedule-day-1" class="schedule-day-panel active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">09:00 AM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Grand Atrium</span>
+                                </div>
+                                <h4>Badge Collection & Welcome Breakfast</h4>
+                                <p>Collect your RFID credentials, developer welcome kit, and enjoy artisan coffee by the bonfire plaza.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">10:30 AM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Stage Alpha</span>
+                                </div>
+                                <h4>Keynote: The Sovereign Intelligence Frontier</h4>
+                                <p>Dr. Elena Vance explores next-decade reasoning systems and self-synthesizing neural architectures.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">01:00 PM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Arena 01</span>
+                                </div>
+                                <h4>Apex Hackathon: Ignition & Problem Statements</h4>
+                                <p>Bounties revealed. Teams form, claim cloud credits, and begin their 36-hour sprint.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">05:30 PM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Courtyard</span>
+                                </div>
+                                <h4>Sunset Bonfire Mixer & Live Ambient Sets</h4>
+                                <p>Mingle with angel syndicates, open-source maintainers, and world-class engineers around our central fire.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Day 2 -->
+                <div id="schedule-day-2" class="schedule-day-panel">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">10:00 AM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Thunderdome</span>
+                                </div>
+                                <h4>Inferno Bot Wars: Qualifying Brackets</h4>
+                                <p>16 battlebots enter the ring in fierce round-robin skirmishes. Sparks and steel fly.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">02:00 PM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Lab 02</span>
+                                </div>
+                                <h4>Hardware Masterclass: Neuromorphic Sensors</h4>
+                                <p>Hands-on firmware hacking with event-based camera sensors and low-power edge tensor cores.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">08:00 PM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Immersion Dome</span>
+                                </div>
+                                <h4>Luminescent: Live Shader Tournament</h4>
+                                <p>Real-time GLSL live-coding battle set to reactive modular synth scores.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Day 3 -->
+                <div id="schedule-day-3" class="schedule-day-panel">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">11:00 AM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Stage Alpha</span>
+                                </div>
+                                <h4>Apex Hackathon: Top 8 Final Demos</h4>
+                                <p>The most ambitious teams pitch their working MVPs live on stage for the grand $25,000 championship.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">04:00 PM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Stage Alpha</span>
+                                </div>
+                                <h4>Awards Ceremony & IGNITE Honors</h4>
+                                <p>Celebrating tournament champions, breakthrough innovators, and best open-source contributions.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">09:00 PM</div>
+                            <div class="timeline-bullet"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-card-header">
+                                    <span class="timeline-stage-tag">Open Air Ground</span>
+                                </div>
+                                <h4>Afterburn Closing Electronic Festival</h4>
+                                <p>Massive flame installations, pyro-kinetic choreography, and international DJ headliners until sunrise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SPEAKERS & GUESTS SECTION -->
+        <section id="speakers">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Visionaries</span>
+                    <h2 class="section-title">Keynotes & <span>Guests</span></h2>
+                    <p class="section-subtitle">Learn directly from the pioneers who are redefining the boundaries of computing and digital civilization.</p>
+                </div>
+
+                <div class="speakers-grid">
+                    <div class="speaker-card" data-modal-title="Dr. Elena Vance" data-modal-desc="Chief Scientist at Synthetix AI and former lead researcher in neural dynamics. Elena has authored over 40 landmark papers on self-calibrating neural networks and emergent intelligence.">
+                        <div class="speaker-avatar-wrap">
+                            <div class="speaker-avatar">EV</div>
+                        </div>
+                        <h3 class="speaker-name">Dr. Elena Vance</h3>
+                        <div class="speaker-title">Chief AI Architect</div>
+                        <div class="speaker-org">Synthetix Labs</div>
+                    </div>
+
+                    <div class="speaker-card" data-modal-title="Kaelen Thorne" data-modal-desc="Founder of KineticForge and 3-time world champion in autonomous robotics combat. Pioneer in high-torque titanium actuators and reactive teleoperation systems.">
+                        <div class="speaker-avatar-wrap">
+                            <div class="speaker-avatar">KT</div>
+                        </div>
+                        <h3 class="speaker-name">Kaelen Thorne</h3>
+                        <div class="speaker-title">Founding Engineer</div>
+                        <div class="speaker-org">KineticForge Robotics</div>
+                    </div>
+
+                    <div class="speaker-card" data-modal-title="Maya Lin" data-modal-desc="Creative director behind viral generative art installations across Tokyo, Berlin, and London. Leading researcher in spatial audio-visual synesthesia.">
+                        <div class="speaker-avatar-wrap">
+                            <div class="speaker-avatar">ML</div>
+                        </div>
+                        <h3 class="speaker-name">Maya Lin</h3>
+                        <div class="speaker-title">Spatial Audio/Visual Director</div>
+                        <div class="speaker-org">Studio Lumina</div>
+                    </div>
+
+                    <div class="speaker-card" data-modal-title="Marcus Sterling" data-modal-desc="Partner at Apex Horizons, investing in frontier hardware, space robotics, and sovereign edge computing platforms.">
+                        <div class="speaker-avatar-wrap">
+                            <div class="speaker-avatar">MS</div>
+                        </div>
+                        <h3 class="speaker-name">Marcus Sterling</h3>
+                        <div class="speaker-title">Managing General Partner</div>
+                        <div class="speaker-org">Apex Horizons Fund</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ATMOSPHERIC VISUAL GALLERY -->
+        <section id="gallery">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Atmosphere</span>
+                    <h2 class="section-title">The IGNITE <span>Experience</span></h2>
+                    <p class="section-subtitle">Catch a glimpse of the raw adrenaline, neon-lit nights, and collaborative spirit that define IGNITE.</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item span-2" style="background: linear-gradient(135deg, #181920, #0a0b10);">
+                        <div class="gallery-visual">
+                            <div class="gallery-info">
+                                <span class="gallery-tag">Stage Alpha</span>
+                                <h4 class="gallery-title">Keynote Spectacle & Holographic Projections</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" style="background: linear-gradient(135deg, #241408, #0e0d14);">
+                        <div class="gallery-visual">
+                            <div class="gallery-info">
+                                <span class="gallery-tag">The Arena</span>
+                                <h4 class="gallery-title">High-Voltage Combat Bot Clashes</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" style="background: linear-gradient(135deg, #1f1205, #08080c);">
+                        <div class="gallery-visual">
+                            <div class="gallery-info">
+                                <span class="gallery-tag">Courtyard</span>
+                                <h4 class="gallery-title">Midnight Bonfire Collective</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item span-2" style="background: linear-gradient(135deg, #121824, #070912);">
+                        <div class="gallery-visual">
+                            <div class="gallery-info">
+                                <span class="gallery-tag">Hackathon Pit</span>
+                                <h4 class="gallery-title">36-Hour Continuous Engineering Jam</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. PASSES & REGISTRATION -->
+        <section id="pricing">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Tickets & Access</span>
+                    <h2 class="section-title">Claim Your <span>Pass</span></h2>
+                    <p class="section-subtitle">Limited tier batches available. Early bird passes include hardware developer kits and VIP lounge access.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- Pass 1 -->
+                    <div class="pricing-card">
+                        <h3 class="pass-name">Spark Pass</h3>
+                        <p class="pass-desc">Perfect for students and enthusiasts wanting access to stages and exhibition arenas.</p>
+                        <div class="pass-price">$149 <span>/ person</span></div>
+                        <ul class="pass-features">
+                            <li>Access to All Keynote Stages</li>
+                            <li>Exhibition Hall & Bot Wars Arena</li>
+                            <li>Official IGNITE Dev Kit & Swag</li>
+                            <li>Community Discord Channels</li>
+                        </ul>
+                        <button class="pass-btn outline" data-modal-title="Spark Pass Selected" data-modal-desc="Spark Pass ticket registration confirmed! You will receive confirmation details and RFID badge QR codes via email.">Select Spark Pass</button>
+                    </div>
+
+                    <!-- Pass 2 (Featured) -->
+                    <div class="pricing-card featured">
+                        <div class="featured-ribbon">Most Popular</div>
+                        <h3 class="pass-name">Blaze Pass</h3>
+                        <p class="pass-desc">Full hackathon participation, workshop tracks, and official networking sessions.</p>
+                        <div class="pass-price">$299 <span>/ person</span></div>
+                        <ul class="pass-features">
+                            <li>Everything in Spark Pass</li>
+                            <li>Full Apex Hackathon Participation</li>
+                            <li>Cloud GPU Credits ($500 Value)</li>
+                            <li>Hands-on Hardware Lab Workstations</li>
+                            <li>Admission to Afterburn Night Festival</li>
+                        </ul>
+                        <button class="pass-btn solid" data-modal-title="Blaze Pass Selected" data-modal-desc="Blaze Pass reservation opened! Your hackathon team credentials and GPU cluster access keys will be delivered to your inbox.">Claim Blaze Pass</button>
+                    </div>
+
+                    <!-- Pass 3 -->
+                    <div class="pricing-card">
+                        <h3 class="pass-name">Inferno VIP</h3>
+                        <p class="pass-desc">Executive pass for founders, angel syndicates, and technical leaders.</p>
+                        <div class="pass-price">$699 <span>/ person</span></div>
+                        <ul class="pass-features">
+                            <li>All-Access VIP Fast-Track</li>
+                            <li>Private Founder & Investor Lounges</li>
+                            <li>Exclusive Speaker Fireside Dinners</li>
+                            <li>Front-Row Reserved Keynote Seating</li>
+                            <li>VIP Bonfire Terrace Open Bar</li>
+                        </ul>
+                        <button class="pass-btn outline" data-modal-title="Inferno VIP Selected" data-modal-desc="Inferno VIP Concierge initiated. A private concierge liaison will contact you with invitation badges and VIP lounge access schedules.">Reserve Inferno VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. TEAM & PARTNERS -->
+        <section id="team">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">The Collective</span>
+                    <h2 class="section-title">Leadership & <span>Allies</span></h2>
+                    <p class="section-subtitle">Organized by an international council of designers, technologists, and researchers.</p>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">AR</div>
+                        <h4 class="team-name">Alex Rivera</h4>
+                        <div class="team-role">Executive Producer</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">SC</div>
+                        <h4 class="team-name">Sora Chen</h4>
+                        <div class="team-role">Head of Technology</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">DK</div>
+                        <h4 class="team-name">Devon Knight</h4>
+                        <div class="team-role">Creative Director</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">PL</div>
+                        <h4 class="team-name">Priya Lakhani</h4>
+                        <div class="team-role">Hackathon Lead</div>
+                    </div>
+                </div>
+
+                <div class="partners-strip">
+                    <span class="section-tag">Supported By Industry Titans</span>
+                    <div class="partners-logos">
+                        <span class="partner-badge">HYPERION</span>
+                        <span class="partner-badge">QUANTUM.IO</span>
+                        <span class="partner-badge">NEURALIS</span>
+                        <span class="partner-badge">CHRONOS LABS</span>
+                        <span class="partner-badge">AETHER VENTURES</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CONTACT & FOOTER -->
+        <section id="contact">
+            <div class="section-container">
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <span class="section-tag">Connect</span>
+                        <h3>Ignite Your Presence</h3>
+                        <p>Have questions regarding enterprise team delegations, hackathon tracks, or press access? Reach out to our organizing team directly.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">📍</div>
+                                <span>Pier 48 Innovation Complex, San Francisco, CA</span>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">✉️</div>
+                                <span>contact@ignitesummit.io</span>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">🔥</div>
+                                <span>#Ignite2026 • Spark The Future</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="newsletter-box">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.4rem; color: #fff; margin-bottom: 8px;">Stay In The Loop</h4>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary);">Subscribe for speaker releases, competition problem drops, and stage schedules.</p>
+
+                        <form id="newsletter-form" class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Enter your email" required aria-label="Email address">
+                            <button type="submit" class="newsletter-submit">Subscribe</button>
+                        </form>
+                        <div id="subscribe-success" class="alert-success">✓ You are subscribed to IGNITE 2026 updates!</div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div>© 2026 IGNITE APEX SUMMIT. ALL RIGHTS RESERVED.</div>
+                    <button id="replay-btn" class="footer-replay-btn" title="Replay the cinematic bonfire ignition intro">↻ Replay Cinematic Intro</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Window -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close" aria-label="Close modal">&times;</button>
+            <h3 id="modal-title" class="modal-title">Details</h3>
+            <p id="modal-body" class="modal-body">Description text.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Three.js (r128 CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/fire-engine.js"></script>
+    <script src="js/sequence-controller.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
